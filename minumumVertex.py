@@ -35,7 +35,19 @@ def create_file():
 #function to write information of graph on the file
 def write_file(id, graph):
     file = open(text_file, "a")  
-    file.write(str(id) + ": " + str(graph) + "\n\n")
+    file.write(str(id) + ":\n")
+    #file.write(str(graph) + "\n\n")
+    for row in range(len(graph)):
+        file.write("\t\t" + str(graph[0][row]))
+
+    file.write("\n")
+
+    for i in range(len(graph)):
+        file.write(str(graph[0][i]) + "\t")
+        for j in range(len(graph)):
+            file.write(str(graph[i][j]) + "\t")
+        file.write("\n")
+    file.write("\n\n")
     file.close() 
 
 #function to write the percentage of edges on file before writing graph    
@@ -84,7 +96,7 @@ def main():
         write_percentage(percentage)
         for i in graph:
             write_file(i, graph[i])
-            #print(graph[i])
+            print(graph[i])
     
 
     #make_adj_matrix(graph)
