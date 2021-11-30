@@ -16,14 +16,52 @@ Minimum Vertex Cover Set: 0 1 2 3 4 5 6 7 8 9
 Number of operations: 10
 The minimum vertex cover is 1
 
+
+Percentage of egdes, 50 
+10 :
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	1	1	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	1	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+	
+Minimum Vertex Cover Set: 0 1 2 3 4 5 6 7 8 9 
+Number of operations: 10
+The minimum vertex cover is 1
+
+
+Percentage of egdes, 75 
+10 :
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	1	0	1	1	1	1	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	1	0	0	1	0	1	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+0	0	0	0	0	0	0	0	0	0	
+	
+Minimum Vertex Cover Set: 0 1 2 3 4 5 6 7 8 9 
+Number of operations: 10
+The minimum vertex cover is 2
+
+
+Percentage of egdes, 25 
 11 :
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
-0	1	0	1	0	0	0	0	0	0	0	
+0	0	0	1	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
-0	0	0	1	0	0	1	0	0	0	0	
+0	1	0	1	0	0	1	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
@@ -35,30 +73,14 @@ The minimum vertex cover is 0
 
 
 Percentage of egdes, 50 
-10 :
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	1	1	0	0	1	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	1	0	1	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-	
-Minimum Vertex Cover Set: 0 1 2 3 4 5 6 7 8 9 
-Number of operations: 10
-The minimum vertex cover is 2
-
 11 :
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
-0	1	0	0	1	1	0	0	0	0	0	
+0	1	0	1	0	1	1	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
-0	0	0	1	1	0	0	0	1	0	0	
+0	0	0	0	0	1	0	0	0	1	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	
@@ -70,22 +92,6 @@ The minimum vertex cover is 2
 
 
 Percentage of egdes, 75 
-10 :
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	1	0	0	0	1	1	1	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	1	0	0	1	0	1	1	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-0	0	0	0	0	0	0	0	0	0	
-	
-Minimum Vertex Cover Set: 0 1 2 3 4 5 6 7 8 9 
-Number of operations: 10
-The minimum vertex cover is 2
-
 11 :
 0	0	0	0	0	0	0	0	0	0	0	
 0	0	0	0	0	0	0	0	0	0	0	

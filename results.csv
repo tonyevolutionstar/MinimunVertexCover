@@ -1,0 +1,7 @@
+Number of Vertices, Percentage, Number of operations, Minimum Vertex Cover, Execution Time
+10,25,10,1,0.00101
+10,50,10,1,0.00101
+10,75,10,2,0.00101
+11,25,11,0,0.00101
+11,50,11,2,0.00101
+11,75,11,1,0.00101

@@ -8,6 +8,7 @@ import itertools
 random.seed(101193) #define seed with my number of student
 text_file = "output_graph.txt"
 adj_file = "adj_matrix.txt"
+results_file = "results.csv" # the propose is analyse results from algorithm
 
 #function to generate the coordinates for x and y 
 def generate_coordinate(min=1, max=9):
@@ -47,7 +48,7 @@ def generate_vertices(n_vertices):
 #function to create a new file when the application runs
 def create_file():
     file = open(text_file, "w")  
-    file.write("id: {(x, y): n_edges}\n")
+    file.write("id: {(x, y)}\n")
     file.close()
 
 #function to write information of graph on the file
@@ -78,15 +79,27 @@ def write_adj_matrix(id, graph):
     file.write("\t\n")
     file.close() 
 
-def write_operations_minimum(points, exaustive, counts, min):
+def write_operations_minimum(points, exaustive, counts, min_vertex):
     file = open(adj_file, "a")
     file.write("Minimum Vertex Cover Set: ")
     for node in range(len(points)):
         if exaustive[node]:
             file.write(f"{node} ")
     file.write(f"\nNumber of operations: {counts}\n")
-    file.write(f"The minimum vertex cover is {min}\n\n")
+    file.write(f"The minimum vertex cover is {min_vertex}\n\n")
     file.close()
+
+
+def create_file_results():
+    file = open(results_file, "w")
+    file.write("Number of Vertices, Percentage, Number of operations, Minimum Vertex Cover, Execution Time\n")
+    file.close()
+
+def write_results_csv(n_graph, percentage, counts, min_vertex, execution_time):
+    file = open(results_file, "a")
+    file.write(f"{n_graph},{percentage},{counts},{min_vertex},{execution_time}\n")
+    file.close()
+
 
 def exaustive_search_vertex(graph):
     count_operations = 0
@@ -143,7 +156,8 @@ def main():
     max_vertices = 11
     create_file() # create "output_graph.txt" every time that program runs
     create_file_adj() # for adj matrix
-
+    create_file_results()
+    exec_time = 0
     start = time.time()
 
     if min_vertices == max_vertices:
@@ -155,14 +169,15 @@ def main():
         for i in range(min_vertices,max_vertices+1):
             graph[i] = generate_vertices(i)
             stop = time.time() - start
-            print(f"Graph, {i} generated in, {round(stop,5)} seconds")
+            exec_time = round(stop,5)
+            print(f"Graph, {i} generated in, {exec_time} seconds")
             write_file(i, graph[i]) # write to a file "output_graph.txt" the graph
 
         # generate edges and adj_matrix
-        for percentage in percentage_egdes:
-            write_percentage(adj_file, percentage)
+        for i in graph:
+            for percentage in percentage_egdes:
+                write_percentage(adj_file, percentage)
             
-            for i in graph:
                 points = graph[i]
                 # initializate the adj matrix 
                 adj_matrix = generate_edges(points, percentage)
@@ -171,9 +186,9 @@ def main():
                 #print("Minimum Vertex Cover Set")
                 #print(f"Number of operations, {counts} ")
                 write_adj_matrix(i, adj_matrix)
-                min = vertex_cover_naive(adj_matrix, adj_matrix)
-                write_operations_minimum(points, exaustive, counts, min)
-                
+                min_vertex = vertex_cover_naive(adj_matrix, adj_matrix)
+                write_operations_minimum(points, exaustive, counts, min_vertex)
+                write_results_csv(i, percentage, counts, min_vertex, exec_time)
                 #print(f"The minimum vertex cover is {vertex_cover_naive(adj_matrix, adj_matrix)}")
     else:
         print("The program only accepts graph with 10 or more vertices")
