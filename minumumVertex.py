@@ -126,15 +126,13 @@ def exaustive_search_vertex(graph):
     return visited
 
 def validity_check(graph, cover):
-    count = 0
     is_valid = True
     for i in range(len(graph)):
         for j in range(i+1, len(graph[i])):
-            count += 1
             if graph[i][j] == 1 and cover[i] != '1' and cover[j] != '1':
-                return False, count
+                return False
 
-    return is_valid, count
+    return is_valid
 
 def vertex_cover_naive(graph, ins):
     n = len(graph)
@@ -142,8 +140,9 @@ def vertex_cover_naive(graph, ins):
     a = list(itertools.product(*["01"] * n))
     count_vertex = 0
     for i in a:
-        is_valid, count = validity_check(ins, i)
-        count_vertex = count
+        count_vertex += 1
+        is_valid = validity_check(ins, i)
+        
         if is_valid == True:
             counter = 0
             for value in i:
@@ -178,10 +177,10 @@ def main():
             write_file(i, graph[i]) # write to a file "output_graph.txt" the graph
 
         # generate edges and adj_matrix
-        for i in graph:
-            start = time.time()
-            print(f"Doing the minimum vertex cover to {i}")
-            for percentage in percentage_egdes:
+        for percentage in percentage_egdes:
+            for i in graph:
+                start = time.time()
+                print(f"Doing the minimum vertex cover to {i}")
                 write_percentage(adj_file, percentage)
             
                 points = graph[i]
