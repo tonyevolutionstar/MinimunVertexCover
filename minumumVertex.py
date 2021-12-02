@@ -4,6 +4,7 @@ from os import write
 import time
 import random
 import itertools
+import gc
 
 random.seed(101193) #define seed with my number of student
 text_file = "output_graph.txt"
@@ -102,7 +103,6 @@ def write_results_csv(n_graph, percentage, counts, min_vertex, execution_time):
 
 
 def exaustive_search_vertex(graph):
-    count_operations = 0
 
     """ THIS CODE WAS ADAPTED FROM
         https://www.geeksforgeeks.org/vertex-cover-problem-set-1-introduction-approximate-algorithm-2/
@@ -121,39 +121,43 @@ def exaustive_search_vertex(graph):
                     # edges from/to them would be ignored
                     visited[v] = True
                     visited[node] = True
-                    count_operations += 1
                     break
 
-    return visited, count_operations
+    return visited
 
 def validity_check(graph, cover):
+    count = 0
     is_valid = True
     for i in range(len(graph)):
         for j in range(i+1, len(graph[i])):
+            count += 1
             if graph[i][j] == 1 and cover[i] != '1' and cover[j] != '1':
-                return False
+                return False, count
 
-    return is_valid
+    return is_valid, count
 
 def vertex_cover_naive(graph, ins):
     n = len(graph)
     minimum_vertex_cover = n
     a = list(itertools.product(*["01"] * n))
+    count_vertex = 0
     for i in a:
-        if validity_check(ins, i):
+        is_valid, count = validity_check(ins, i)
+        count_vertex = count
+        if is_valid == True:
             counter = 0
             for value in i:
                 if value == '1':
                     counter += 1
             minimum_vertex_cover = min(counter, minimum_vertex_cover)
-    return minimum_vertex_cover
+    return minimum_vertex_cover, count_vertex
     
 def main():
     graph = {}
     # in this problem doesn't make sence to do a graph with 0% and 100% of edges 
     percentage_egdes = [25, 50, 75]
     min_vertices = 10
-    max_vertices = 11
+    max_vertices = 24
     create_file() # create "output_graph.txt" every time that program runs
     create_file_adj() # for adj matrix
     create_file_results()
@@ -166,30 +170,35 @@ def main():
 
     if min_vertices >= 10:
         # generate graph one time and save the graph on dictionary 
-        for i in range(min_vertices,max_vertices+1):
+        for i in range(min_vertices,max_vertices):
             graph[i] = generate_vertices(i)
             stop = time.time() - start
-            exec_time = round(stop,5)
+            exec_time = round(stop, 7)
             print(f"Graph, {i} generated in, {exec_time} seconds")
             write_file(i, graph[i]) # write to a file "output_graph.txt" the graph
 
         # generate edges and adj_matrix
         for i in graph:
+            start = time.time()
+            print(f"Doing the minimum vertex cover to {i}")
             for percentage in percentage_egdes:
                 write_percentage(adj_file, percentage)
             
                 points = graph[i]
                 # initializate the adj matrix 
                 adj_matrix = generate_edges(points, percentage)
-                exaustive, counts = exaustive_search_vertex(points)
+                exaustive = exaustive_search_vertex(points)
                 #print(f"graph, {i} percentage, {percentage}")
                 #print("Minimum Vertex Cover Set")
                 #print(f"Number of operations, {counts} ")
                 write_adj_matrix(i, adj_matrix)
-                min_vertex = vertex_cover_naive(adj_matrix, adj_matrix)
+                min_vertex, counts = vertex_cover_naive(adj_matrix, adj_matrix)
                 write_operations_minimum(points, exaustive, counts, min_vertex)
+                stop = time.time() - start
+                exec_time = round(stop, 7)
                 write_results_csv(i, percentage, counts, min_vertex, exec_time)
-                #print(f"The minimum vertex cover is {vertex_cover_naive(adj_matrix, adj_matrix)}")
+                #print(f"The minimum vertex cover is {vertex_cover_naive(adj_matrix, adj_matrix)}")   
+        gc.collect()   
     else:
         print("The program only accepts graph with 10 or more vertices")
         exit(1)
